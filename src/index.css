@@ -1,13 +1,112 @@
-body {
+*,
+::after,
+::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Kumbh Sans", sans-serif;
+  line-height: 1.5;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+/*Navbar*/
+nav {
+  font-size: 18px;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  top: 0;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  color: #9b9b9b;
+}
+.nav-center {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-toggle {
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: #9b9b9b;
+  font-size: 24px;
+}
+.nav-logo {
+  height: 40px;
+  padding: 5px;
+}
+
+.social-icons {
+  display: none;
+}
+.links {
+  display: none;
+}
+.search-icon {
+  padding: 15px 20px;
+  color: #9b9b9b;
+  background: transparent;
+  border-color: transparent;
+  font-size: 24px;
+}
+.search-icon:hover {
+  color: #ff0000;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-center {
+    padding: 0;
+  }
+  .search-links {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+  .search-icon {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+  .search-icon:hover {
+    color: #ff0000;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+  }
+  .link {
+    padding: 15px 20px;
+    color: #9b9b9b;
+    font-family: "Kumbh Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .link-btn {
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
+  }
+  .link:hover {
+    color: #ff0000;
+  }
+  .social-icons {
+    display: flex;
+  }
+  .social-icons a {
+    margin: 0 10px;
+    color: #9b9b9b;
+    font-size: 28px;
+  }
 }
