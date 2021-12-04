@@ -75,7 +75,7 @@ nav {
     display: none;
   }
   .search-icon {
-    padding: 15px 20px;
+    padding: 14px 20px;
     font-size: 16px;
   }
   .search-icon:hover {
@@ -86,7 +86,7 @@ nav {
     align-items: center;
   }
   .link {
-    padding: 15px 20px;
+    padding: 14px 20px;
     color: #9b9b9b;
     font-family: "Kumbh Sans", sans-serif;
     font-size: 18px;
@@ -109,4 +109,23 @@ nav {
     color: #9b9b9b;
     font-size: 28px;
   }
+}
+/*subLinks*/
+.submenu {
+  font-size: 18px;
+  position: absolute;
+  width: 50%;
+  z-index: 2;
+  top: 50px;
+  border: 5px 0;
+  border-color: black;
+  display: none;
+}
+.sublinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.submenu.show {
+  display: block;
 }

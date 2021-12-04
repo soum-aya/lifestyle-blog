@@ -1,11 +1,20 @@
 import React from "react";
-import { links, social } from "./data";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { social } from "./data";
+import { FaBars, FaSearch, FaCaretDown } from "react-icons/fa";
 import logo from "./images/logo.svg";
+import { useGlobalContext } from "./context";
 
 function Navbar() {
+  const { openSubmenu, closeSubmenu } = useGlobalContext();
+
+  const handleSubnav = (e) => {
+    if (!e.target.classList.contains("link-btn")) {
+      closeSubmenu();
+    }
+  };
+
   return (
-    <nav>
+    <nav onMouseOver={handleSubnav}>
       <div className="nav-center">
         <div className="search-links">
           <div className="nav-search">
@@ -20,7 +29,10 @@ function Navbar() {
               </a>
             </li>
             <li>
-              <button className="link-btn link">categories</button>
+              <button className="link-btn link" onMouseOver={openSubmenu}>
+                categories
+                <FaCaretDown />
+              </button>
             </li>
           </ul>
         </div>
