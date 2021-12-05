@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { social } from "./data";
-import { FaBars, FaSearch, FaCaretDown } from "react-icons/fa";
+import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
 import logo from "./images/logo.svg";
 import { useGlobalContext } from "./context";
 
 function Navbar() {
-  const { openSubmenu, closeSubmenu } = useGlobalContext();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch } = useGlobalContext();
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -16,28 +18,38 @@ function Navbar() {
   return (
     <nav onMouseOver={handleSubnav}>
       <div className="nav-center">
-        <div className="search-links">
-          <div className="nav-search">
-            <button className="search-icon">
-              <FaSearch />
-            </button>
-          </div>
-          <ul className="links">
-            <li>
-              <a href="/about" className="link">
-                about
-              </a>
-            </li>
-            <li>
-              <button className="link-btn link" onMouseOver={openSubmenu}>
-                categories
-                <FaCaretDown />
+        <div className="nav-search">
+          {isSearchOpen ? (
+            <div className="search-form">
+              <button className="search-icon">
+                <FaSearch />
               </button>
-            </li>
-          </ul>
+              <input type="text" className="search-input" />
+              <FaTimes className="search-close" onClick={closeSearch} />
+            </div>
+          ) : (
+            <div className="search-links">
+              <button className="search-icon" onClick={openSearch}>
+                <FaSearch />
+              </button>
+              <ul className="links">
+                <li>
+                  <a href="/about" className="link">
+                    about
+                  </a>
+                </li>
+                <li>
+                  <button className="link-btn link" onMouseOver={openSubmenu}>
+                    categories
+                    <FaCaretDown />
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
         <img src={logo} className="nav-logo" alt="logo" />
-        <button className="nav-toggle">
+        <button className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <FaBars />
         </button>
         <ul className="social-icons">
@@ -50,6 +62,13 @@ function Navbar() {
             );
           })}
         </ul>
+      </div>
+      <div className={isSearchOpen ? "search-form-responsive" : "search-form-responsive-none"}>
+        <button className="search-icon">
+          <FaSearch />
+        </button>
+        <input type="text" className="search-input" />
+        <FaTimes className="search-close" onClick={closeSearch} />
       </div>
     </nav>
   );
