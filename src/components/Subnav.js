@@ -1,6 +1,6 @@
 import React from "react";
-import { useGlobalContext } from "./context";
-import { links } from "./data";
+import { useGlobalContext } from "../context";
+import { links } from "../data";
 
 const Subnav = () => {
   const { isSubmenuOpen } = useGlobalContext();

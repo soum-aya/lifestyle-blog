@@ -73,6 +73,26 @@ nav {
 .search-form-responsive-none {
   display: none;
 }
+.links-responsive {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 25px 10px;
+}
+.links-responsive-none {
+  display: none;
+}
+.link {
+  padding: 14px 20px;
+  color: #9b9b9b;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+.link-hide {
+  display: none;
+}
 .search-input {
   border: none;
   background-color: #eeeeee;
@@ -89,13 +109,7 @@ nav {
 .search-close:hover {
   color: #ff0000;
 }
-.show-menu {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 25px 10px;
-  top: 60px;
-}
+
 .caretDown-icon {
   display: none;
 }
@@ -138,14 +152,7 @@ nav {
     display: flex;
     align-items: center;
   }
-  .link {
-    padding: 14px 20px;
-    color: #9b9b9b;
-    font-family: "Kumbh Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    text-transform: capitalize;
-  }
+
   .link-btn {
     background: transparent;
     border-color: transparent;
@@ -157,7 +164,7 @@ nav {
   .caretDown-icon {
     display: inline;
   }
-  .contact-link {
+  .links-responsive {
     display: none;
   }
   .social-icons {
@@ -178,7 +185,6 @@ nav {
   background-color: rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid black;
   border-top: 1px solid #000;
-  top: 50px;
   right: 0;
   display: none;
 }

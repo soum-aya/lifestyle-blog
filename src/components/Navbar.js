@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { social } from "./data";
+import { social } from "../data";
 import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
-import logo from "./images/logo.svg";
-import { useGlobalContext } from "./context";
+import logo from "../images/logo.svg";
+import { useGlobalContext } from "../context";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,9 +35,9 @@ function Navbar() {
               </button>
               <ul className="links">
                 <li>
-                  <a href="/about" className="link">
+                  <Link to="/about" className="link">
                     about
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <button className="link-btn link" onMouseOver={openSubmenu}>
@@ -48,9 +49,11 @@ function Navbar() {
             </div>
           )}
         </div>
-        <img src={logo} className="nav-logo" alt="logo" />
+        <Link to="/">
+          <img src={logo} className="nav-logo" alt="logo" />
+        </Link>
         <button className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <FaBars />
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
         <ul className="social-icons">
           {social.map((item) => {
@@ -70,6 +73,23 @@ function Navbar() {
         <input type="text" className="search-input" />
         <FaTimes className="search-close" onClick={closeSearch} />
       </div>
+      <ul className={isMenuOpen ? "links-responsive" : "links-responsive-none"}>
+        <li>
+          <a href="/about" className={isSearchOpen ? "link-hide" : "link"}>
+            about
+          </a>
+        </li>
+        <li>
+          <a href="/about" className={isSearchOpen ? "link-hide" : "link"}>
+            categories
+          </a>
+        </li>
+        <li>
+          <a href="/about" className={isSearchOpen ? "link-hide" : "link"}>
+            contact
+          </a>
+        </li>
+      </ul>
     </nav>
   );
 }
