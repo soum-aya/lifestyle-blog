@@ -4,11 +4,10 @@ import PostList from "../components/PostList";
 import { useGlobalContext } from "../context";
 
 const Home = () => {
-  const { closeSubmenu } = useGlobalContext;
+  const { closeSubmenu } = useGlobalContext();
 
   return (
     <main onMouseOver={closeSubmenu}>
-      <Hero />
       <PostList />
     </main>
   );
