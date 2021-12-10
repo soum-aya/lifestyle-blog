@@ -208,20 +208,20 @@ nav {
   display: block;
 }
 
-.section {
-  padding: 5rem 0;
+/* hero */
+.hero-center {
+  display: flex;
 }
-.section-title {
-  font-size: 2rem;
-  text-transform: capitalize;
-  text-align: center;
-  margin-bottom: 3.5rem;
-  margin-top: 1rem;
+
+.hero-logo {
+  display: block;
+  height: 100px;
+  margin: 0 auto 50px;
 }
-.posts-center {
-  margin: 0 auto;
-  display: grid;
-  row-gap: 2rem;
-  column-gap: 2rem;
-  /* align-items: start; */
+.hero-post {
+  background-color: #f9f4f3;
+  padding: 40px 70px;
 }
+/* .hero-image {
+  background-image: url("");
+} */

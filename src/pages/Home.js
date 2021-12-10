@@ -8,6 +8,7 @@ const Home = () => {
 
   return (
     <main onMouseOver={closeSubmenu}>
+      <Hero />
       <PostList />
     </main>
   );
