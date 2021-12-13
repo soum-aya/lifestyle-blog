@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/logo.svg";
+import { FaCaretRight } from "react-icons/fa";
 
-const url = "http://localhost/wordpress/wp-json/wp/v2/posts/9";
+const url1 = "http://localhost/wordpress/wp-json/wp/v2/posts/9";
+const url2 = "http://localhost/wordpress/wp-json/wp/v2/media/13";
 
 function Hero() {
   const [heroPost, setHeroPost] = useState([]);
@@ -9,33 +11,21 @@ function Hero() {
 
   const fetchHeropost = async () => {
     try {
-      const response = await fetch(url);
-      const heroPost = await response.json();
+      const [response1, response2] = await Promise.all([fetch(url1), fetch(url2)]);
+      const heroPost = await response1.json();
+      const imgUrl = await response2.json();
       setHeroPost(heroPost);
+      setImgUrl(imgUrl);
 
-      console.log(heroPost._links["wp:featuredmedia"][0].href);
+      console.log(heroPost);
+      console.log(imgUrl);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // i have to use promises and use http://localhost/wordpress/wp-json/wp/v2/media/13 to fetch media
-  // const url = `http://localhost/wordpress/wp-json/wp/v2/posts/9/media/${featured_media}`;
-
-  // const fetchImgUrl = async () => {
-  //   try {
-  //     const response = await fetch(url);
-  //     const imgUrl = await response.json()[0].data.media_details.sizes.full.source_url;
-  //     setImgUrl(imgUrl);
-  //     console.log(imgUrl);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     fetchHeropost();
-    // fetchImgUrl();
   }, []);
 
   if (heroPost.length < 1) {
@@ -44,15 +34,20 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-center">
-        <article className="hero-info">
-          <img src={logo} className="hero-logo" alt="logo" />
-          <div className="hero-post">
-            <h2 className="hero-title">{heroPost.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: heroPost.excerpt.rendered }} className="hero-desc"></div>
+        <article className="hero-container">
+          <div className="hero-info">
+            <img src={logo} className="hero-logo" alt="logo" />
+            <div className="hero-post">
+              <h2 className="hero-title">{heroPost.title.rendered}</h2>
+              <div dangerouslySetInnerHTML={{ __html: heroPost.content.rendered.substring(0, 249) }} className="hero-desc"></div>
+              <a href="#" className="read-more">
+                read more
+                <FaCaretRight style={{ marginLeft: "6px", fontSize: "20px" }} />
+              </a>
+            </div>
           </div>
         </article>
-        {/* <div className="hero-image" style={{ backgroundImage: `url(${heroPost._links["wp:featuredmedia"][0].href})` }}></div> */}
-        <img src={heroPost._links["wp:featuredmedia"][0].href} />
+        <div className="hero-image" style={{ backgroundImage: `url(${imgUrl.source_url})` }}></div>
       </div>
     </section>
   );
