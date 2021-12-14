@@ -13,7 +13,6 @@ export const AppProvider = ({ children }) => {
       const response = await fetch(url);
       const posts = await response.json();
       setPosts(posts);
-      console.log(posts);
     } catch (error) {
       console.log(error);
     }

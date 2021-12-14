@@ -16,9 +16,6 @@ function Hero() {
       const imgUrl = await response2.json();
       setHeroPost(heroPost);
       setImgUrl(imgUrl);
-
-      console.log(heroPost);
-      console.log(imgUrl);
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +37,7 @@ function Hero() {
             <div className="hero-post">
               <h2 className="hero-title">{heroPost.title.rendered}</h2>
               <div dangerouslySetInnerHTML={{ __html: heroPost.content.rendered.substring(0, 249) }} className="hero-desc"></div>
-              <a href="#" className="read-more">
+              <a href="#" className="read-more read-more-hero">
                 read more
                 <FaCaretRight style={{ marginLeft: "6px", fontSize: "20px" }} />
               </a>
