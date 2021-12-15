@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "../context";
 import SingleFeaturedPost from "./SingleFeaturedPost";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const FeaturedPosts = () => {
   const { posts } = useGlobalContext();
-  const [index, setIndex] = useState(0);
+  // const [sliderRef, setSliderRef] = useState(null);
 
-  useEffect(() => {
-    const lastIndex = posts.length - 1;
-    if (index < 0) {
-      setIndex(lastIndex);
-    }
-    if (index > lastIndex) {
-      setIndex(0);
-    }
-  }, [index]);
+  const settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   if (posts.length < 1) {
     return <p>no posts</p>;
@@ -24,23 +23,19 @@ const FeaturedPosts = () => {
     <section className="featured-posts">
       <h2 className="featured-posts-title">Featured posts</h2>
       <div className="featured-posts-center">
-        {posts.map((post, postIndex) => {
-          let position = "nextSlide";
-          if (postIndex === index) {
-            position = "activeSlide";
-          }
-          if (postIndex === index - 1 || (index === 0 && postIndex === posts.length - 1)) {
-            position = "lastSlide";
-          }
-          console.log(post);
-          return <SingleFeaturedPost key={post.id} {...post} className={position} />;
-        })}
-        <button className="prev" onClick={() => setIndex(index - 1)}>
-          <FaArrowLeft />
-        </button>
-        <button className="next" onClick={() => setIndex(index + 1)}>
-          <FaArrowRight />
-        </button>
+        {/* <div className="controls">
+          <button onCLick={sliderRef?.slickPrev}>
+            <FaArrowLeft />
+          </button>
+          <button onCLick={sliderRef?.slickNext}>
+            <FaArrowRight />
+          </button>
+        </div> */}
+        <Slider {...settings}>
+          {posts.map((post) => {
+            return <SingleFeaturedPost key={post.id} {...post} />;
+          })}
+        </Slider>
       </div>
     </section>
   );

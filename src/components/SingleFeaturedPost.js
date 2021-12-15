@@ -17,9 +17,10 @@ const SingleFeaturedPost = ({ content, featured_media }) => {
   useEffect(() => {
     fetchFeaturedImg();
   }, []);
+
   return (
-    <article>
-      <div className="featured-post-img" style={{ backgroundImage: `url(${featuredImg.source_url})` }}></div>
+    <article className="card">
+      <img src={featuredImg.source_url} className="featured-post-img" />
       <div className="featured-post-info">
         <div dangerouslySetInnerHTML={{ __html: `${content.rendered.substring(0, 50)}...` }} className="featured-post-desc"></div>
         <a href="#" className="read-more featured-post-link">
