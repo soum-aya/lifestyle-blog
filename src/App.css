@@ -285,19 +285,24 @@ nav {
   max-width: 24rem;
   position: relative;
 }
-.slick-prev {
+/* .slick-prev {
   left: 3% !important;
   z-index: 1;
 }
 .slick-next {
   right: 3% !important;
   z-index: 1;
-}
-.controls {
+} */
+/* .controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+} */
+
+.slick-prev:before,
+.slick-next:before {
+  content: "" !important;
 }
 
 .controls button {
