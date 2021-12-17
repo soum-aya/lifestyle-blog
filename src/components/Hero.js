@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/logo.svg";
 import { FaCaretRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const url1 = "http://localhost/wordpress/wp-json/wp/v2/posts/9";
-const url2 = "http://localhost/wordpress/wp-json/wp/v2/media/13";
+const url2 = "http://localhost/wordpress/wp-json/wp/v2/media/10";
 
 function Hero() {
   const [heroPost, setHeroPost] = useState([]);
@@ -15,6 +16,7 @@ function Hero() {
       const heroPost = await response1.json();
       const imgUrl = await response2.json();
       setHeroPost(heroPost);
+
       setImgUrl(imgUrl);
     } catch (error) {
       console.log(error);
@@ -24,7 +26,7 @@ function Hero() {
   useEffect(() => {
     fetchHeropost();
   }, []);
-
+  const { id } = heroPost;
   if (heroPost.length < 1) {
     return <p>no hero posts</p>;
   }
@@ -37,10 +39,11 @@ function Hero() {
             <div className="hero-post">
               <h2 className="hero-title">{heroPost.title.rendered}</h2>
               <div dangerouslySetInnerHTML={{ __html: heroPost.content.rendered.substring(0, 249) }} className="hero-desc"></div>
-              <a href="#" className="read-more read-more-hero">
+
+              <Link to={`/post/${id}`} className="read-more read-more-hero ">
                 read more
                 <FaCaretRight style={{ marginLeft: "6px", fontSize: "20px" }} />
-              </a>
+              </Link>
             </div>
           </div>
         </article>

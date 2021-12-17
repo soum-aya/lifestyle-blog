@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCaretRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Post = ({ title, content, featured_media, id }) => {
   const mediaUrl = `http://localhost/wordpress/wp-json/wp/v2/media/${featured_media}`;
@@ -11,7 +12,6 @@ const Post = ({ title, content, featured_media, id }) => {
       const response = await fetch(mediaUrl);
       const postImg = await response.json();
       setPostImg(postImg);
-      console.log(postImg);
     } catch (error) {
       console.log(error);
     }
@@ -26,10 +26,10 @@ const Post = ({ title, content, featured_media, id }) => {
       <div className="flex-1 ml-20 flex flex-col items-start justify-center space-y-6 ">
         <h2 className="text-3xl tracking-widest font-bold uppercase">{title.rendered}</h2>
         <div dangerouslySetInnerHTML={{ __html: `${content.rendered.substring(0, 50)}...` }}></div>
-        <a href="#" className="read-more">
+        <Link to={`/post/${id}`} className="read-more ">
           read more
           <FaCaretRight style={{ marginLeft: "6px", fontSize: "20px" }} />
-        </a>
+        </Link>
       </div>
     </article>
   );

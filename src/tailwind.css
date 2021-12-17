@@ -415,37 +415,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.m-36 {
-  margin: 9rem;
-}
-
-.m-20 {
-  margin: 5rem;
-}
-
-.m-24 {
-  margin: 6rem;
-}
-
 .mx-24 {
   margin-left: 6rem;
   margin-right: 6rem;
 }
 
-.mb-24 {
-  margin-bottom: 6rem;
-}
-
-.mb-36 {
-  margin-bottom: 9rem;
-}
-
 .mb-32 {
   margin-bottom: 8rem;
-}
-
-.ml-14 {
-  margin-left: 3.5rem;
 }
 
 .ml-20 {
@@ -458,14 +434,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex {
   display: flex;
-}
-
-.h-80 {
-  height: 20rem;
-}
-
-.h-96 {
-  height: 24rem;
 }
 
 .h-\[800px\] {
@@ -484,18 +452,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   align-items: flex-start;
 }
 
-.items-center {
-  align-items: center;
-}
-
 .justify-center {
   justify-content: center;
-}
-
-.space-y-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -516,23 +474,38 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-repeat: no-repeat;
 }
 
+.px-14 {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.px-32 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.px-20 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
 .text-center {
   text-align: center;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -543,12 +516,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-transform: uppercase;
 }
 
-.tracking-wider {
-  letter-spacing: 0.05em;
-}
-
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 *,
