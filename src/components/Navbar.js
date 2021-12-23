@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails } = useGlobalContext();
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -50,7 +50,7 @@ function Navbar() {
           )}
         </div>
         <Link to="/">
-          <img src={logo} className="h-auto w-[50px]" alt="logo" />
+          <img src={logoDetails.source_url} className="h-auto w-[50px]" alt="logo" />
         </Link>
         <button className="cursor-pointer bg-transparent border-transparent text-nav-gray text-[24px] md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <FaTimes /> : <FaBars />}

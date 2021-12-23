@@ -23,7 +23,7 @@ const SingleFeaturedPost = ({ content, featured_media, id }) => {
     <article className="card">
       <img src={featuredImg.source_url} className="featured-post-img" />
       <div className="featured-post-info">
-        <div dangerouslySetInnerHTML={{ __html: `${content.rendered.substring(0, 50)}...` }} className="featured-post-desc"></div>
+        <div dangerouslySetInnerHTML={{ __html: `${content.rendered.substring(0, 40)}...` }} className="featured-post-desc"></div>
         <Link to={`/post/${id}`} className="read-more read-more-hero ">
           read more
           <FaCaretRight style={{ marginLeft: "6px", fontSize: "20px" }} />

@@ -2,22 +2,27 @@ import React, { useState, useEffect } from "react";
 import logo from "../images/logo.svg";
 import { FaCaretRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
-const url1 = "http://localhost/wordpress/wp-json/wp/v2/posts/9";
+const heroUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?tags=9";
 const url2 = "http://localhost/wordpress/wp-json/wp/v2/media/10";
 
 function Hero() {
-  const [heroPost, setHeroPost] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
+  const [heroPost, setHeroPost] = useState(null);
+  // const [imgUrl, setImgUrl] = useState([]);
+  const { logoDetails } = useGlobalContext();
 
   const fetchHeropost = async () => {
     try {
-      const [response1, response2] = await Promise.all([fetch(url1), fetch(url2)]);
+      const response1 = await fetch(heroUrl);
       const heroPost = await response1.json();
-      const imgUrl = await response2.json();
-      setHeroPost(heroPost);
+      if (heroPost) {
+        setHeroPost(heroPost);
+      } else {
+        setHeroPost(null);
+      }
 
-      setImgUrl(imgUrl);
+      console.log(heroPost);
     } catch (error) {
       console.log(error);
     }
@@ -26,16 +31,17 @@ function Hero() {
   useEffect(() => {
     fetchHeropost();
   }, []);
-  const { id } = heroPost;
-  if (heroPost.length < 1) {
-    return <p>no hero posts</p>;
+  // const { id } = heroPost;
+  if (!heroPost) {
+    return <p>no hero post</p>;
   }
   return (
     <section className="hero">
       <div className="hero-center">
-        <article className="hero-container">
+        <p>{heroPost.title.rendered}</p>
+        {/* <article className="hero-container">
           <div className="hero-info">
-            <img src={logo} className="hero-logo" alt="logo" />
+            <img src={logoDetails.source_url} className="hero-logo" alt="logo" />
             <div className="hero-post">
               <h2 className="hero-title">{heroPost.title.rendered}</h2>
               <div dangerouslySetInnerHTML={{ __html: heroPost.content.rendered.substring(0, 249) }} className="hero-desc"></div>
@@ -46,8 +52,8 @@ function Hero() {
               </Link>
             </div>
           </div>
-        </article>
-        <div className="hero-image" style={{ backgroundImage: `url(${imgUrl.source_url})` }}></div>
+        </article> */}
+        {/* <div className="hero-image" style={{ backgroundImage: `url(${imgUrl.source_url})` }}></div> */}
       </div>
     </section>
   );

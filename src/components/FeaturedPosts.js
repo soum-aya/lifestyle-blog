@@ -9,16 +9,17 @@ import "slick-carousel/slick/slick-theme.css";
 const FeaturedPosts = () => {
   const { posts } = useGlobalContext();
 
-  const NextArrow = ({ className, onClick }) => {
+  const NextArrow = (props) => {
+    const { className, onClick } = props;
     return (
-      <button className={className} style={{ fontSize: "40px", display: "block", right: "5px", zIndex: "1", height: "40px", width: "40px", opacity: "1", color: "black" }} onClick={onClick}>
+      <div className={className} onClick={onClick}>
         <FaArrowRight />
-      </button>
+      </div>
     );
   };
   const PrevArrow = ({ className, onClick }) => {
     return (
-      <div className={className} style={{ fontSize: "40px", display: "block", left: "5px", zIndex: "1", height: "40px", width: "40px", opacity: "1", color: "black" }} onClick={onClick}>
+      <div className={className} onClick={onClick}>
         <FaArrowLeft />
       </div>
     );
@@ -38,13 +39,11 @@ const FeaturedPosts = () => {
   return (
     <section className="featured-posts">
       <h2 className="featured-posts-title">Featured posts</h2>
-      <div className="featured-posts-center">
-        <Slider {...settings}>
-          {posts.map((post) => {
-            return <SingleFeaturedPost key={post.id} {...post} />;
-          })}
-        </Slider>
-      </div>
+      <Slider {...settings}>
+        {posts.map((post) => {
+          return <SingleFeaturedPost key={post.id} {...post} />;
+        })}
+      </Slider>
     </section>
   );
 };

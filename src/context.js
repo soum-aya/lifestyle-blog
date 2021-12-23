@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 const url = "http://localhost/wordpress/wp-json/wp/v2/posts";
 const AppUrl = "http://localhost/wordpress/wp-json";
+const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
@@ -9,6 +10,7 @@ export const AppProvider = ({ children }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [appInfo, setAppInfo] = useState({});
+  const [logoDetails, setLogoDetails] = useState({});
 
   const fetchPosts = async () => {
     try {
@@ -22,10 +24,12 @@ export const AppProvider = ({ children }) => {
 
   const fetchSiteInfo = async () => {
     try {
-      const response = await fetch(AppUrl);
-      const appInfo = await response.json();
+      const response1 = await fetch(AppUrl);
+      const appInfo = await response1.json();
       setAppInfo(appInfo);
-      console.log(appInfo);
+      const response2 = await fetch(`${logoUrl}${appInfo.site_logo}`);
+      const logoDetails = await response2.json();
+      setLogoDetails(logoDetails);
     } catch (error) {
       console.log(error);
     }
@@ -34,6 +38,10 @@ export const AppProvider = ({ children }) => {
     fetchPosts();
     fetchSiteInfo();
   }, []);
+
+  useEffect(() => {
+    document.title = appInfo.name;
+  });
 
   const openSubmenu = () => {
     setIsSubmenuOpen(true);
@@ -50,7 +58,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
