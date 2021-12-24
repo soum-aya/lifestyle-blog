@@ -71,8 +71,7 @@ a {
 }
 .hero-info {
   width: 100%;
-  max-width: 560px;
-  margin: 0 auto;
+  margin: 0 50px;
 }
 
 .hero-logo {
@@ -88,8 +87,9 @@ a {
 .hero-title {
   text-transform: uppercase;
   font-size: 30px;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 .hero-image {
   height: 800px;

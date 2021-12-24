@@ -422,6 +422,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: var(--tw-empty,/*!*/ /*!*/);
+  --tw-brightness: var(--tw-empty,/*!*/ /*!*/);
+  --tw-contrast: var(--tw-empty,/*!*/ /*!*/);
+  --tw-grayscale: var(--tw-empty,/*!*/ /*!*/);
+  --tw-hue-rotate: var(--tw-empty,/*!*/ /*!*/);
+  --tw-invert: var(--tw-empty,/*!*/ /*!*/);
+  --tw-saturate: var(--tw-empty,/*!*/ /*!*/);
+  --tw-sepia: var(--tw-empty,/*!*/ /*!*/);
+  --tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/);
+  --tw-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .sticky {
@@ -661,6 +671,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   outline-width: 0px;
 }
 
+.filter {
+  filter: var(--tw-filter);
+}
+
 *,
 ::after,
 ::before {
@@ -741,8 +755,7 @@ a {
 
 .hero-info {
   width: 100%;
-  max-width: 560px;
-  margin: 0 auto;
+  margin: 0 50px;
 }
 
 .hero-logo {
@@ -760,8 +773,9 @@ a {
 .hero-title {
   text-transform: uppercase;
   font-size: 30px;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .hero-image {
