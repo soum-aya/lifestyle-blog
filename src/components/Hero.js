@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "../images/logo.svg";
 import { FaCaretRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
@@ -10,7 +9,7 @@ const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
 function Hero() {
   const [heroPost, setHeroPost] = useState(null);
-  const [heroImg, setHeroImg] = useState(null);
+  const [heroImg, setHeroImg] = useState({});
   const { logoDetails } = useGlobalContext();
 
   const fetchTags = async () => {

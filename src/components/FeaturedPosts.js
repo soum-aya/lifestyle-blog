@@ -1,13 +1,16 @@
-import React, { useRef } from "react";
-import { useGlobalContext } from "../context";
+import React, { useState } from "react";
 import SingleFeaturedPost from "./SingleFeaturedPost";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react/cjs/react.development";
+
+const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
+const tagUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?tags=";
 
 const FeaturedPosts = () => {
-  const { posts } = useGlobalContext();
+  const [featuredPosts, setFeaturedPosts] = useState([]);
 
   const NextArrow = (props) => {
     const { className, onClick } = props;
@@ -33,14 +36,32 @@ const FeaturedPosts = () => {
     prevArrow: <PrevArrow />,
   };
 
-  if (posts.length < 1) {
+  const fetchFeaturedPosts = async () => {
+    try {
+      const response = await fetch(tagsUrl);
+      const tags = await response.json();
+
+      const featuredPostTag = tags.filter((tag) => tag.name === "featured-post");
+      const response1 = await fetch(`${tagUrl}${featuredPostTag[0].id}`);
+      const featuredPosts = await response1.json();
+      setFeaturedPosts(featuredPosts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFeaturedPosts();
+  }, []);
+
+  if (featuredPosts.length < 1) {
     return <p>no posts</p>;
   }
   return (
     <section className="featured-posts">
       <h2 className="featured-posts-title">Featured posts</h2>
       <Slider {...settings}>
-        {posts.map((post) => {
+        {featuredPosts.map((post) => {
           return <SingleFeaturedPost key={post.id} {...post} />;
         })}
       </Slider>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Post = ({ title, content, featured_media, id }) => {
   const mediaUrl = `http://localhost/wordpress/wp-json/wp/v2/media/${featured_media}`;
-  // const categorieUrl = `http://localhost/wordpress/wp-json/wp/v2/categories/<${id}>`;
 
   const [postImg, setPostImg] = useState({});
   const fetchPostImg = async () => {
@@ -21,7 +20,7 @@ const Post = ({ title, content, featured_media, id }) => {
   }, []);
 
   return (
-    <article className="flex mb-32">
+    <article className="flex mb-28">
       <div className="h-[800px] bg-center bg-no-repeat bg-cover flex-1" style={{ backgroundImage: `url(${postImg.source_url})` }}></div>
       <div className="flex-1 ml-20 flex flex-col items-start justify-center space-y-6 ">
         <h2 className="text-3xl tracking-widest font-bold uppercase">{title.rendered}</h2>

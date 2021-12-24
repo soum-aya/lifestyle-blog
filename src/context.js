@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 
-const url = "http://localhost/wordpress/wp-json/wp/v2/posts";
+const allPostsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts";
+const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?per_page=";
 const AppUrl = "http://localhost/wordpress/wp-json";
 const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
+
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
@@ -12,9 +14,22 @@ export const AppProvider = ({ children }) => {
   const [appInfo, setAppInfo] = useState({});
   const [logoDetails, setLogoDetails] = useState({});
 
+  const [pageNum, setPageNum] = useState(4);
+  const [allPosts, setAllPosts] = useState([]);
+
+  const fetchallPosts = async () => {
+    try {
+      const res = await fetch(allPostsUrl);
+      const allPosts = await res.json();
+      setAllPosts(allPosts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchPosts = async () => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(`${postsUrl}${pageNum}`);
       const posts = await response.json();
       setPosts(posts);
     } catch (error) {
@@ -34,14 +49,19 @@ export const AppProvider = ({ children }) => {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    fetchPosts();
     fetchSiteInfo();
+    fetchallPosts();
   }, []);
 
   useEffect(() => {
     document.title = appInfo.name;
   });
+
+  useEffect(() => {
+    fetchPosts();
+  }, [pageNum]);
 
   const openSubmenu = () => {
     setIsSubmenuOpen(true);
@@ -58,7 +78,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
