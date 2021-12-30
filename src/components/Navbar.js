@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { social } from "../data";
 import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
-import logo from "../images/logo.svg";
 import { useGlobalContext } from "../context";
 import { Link } from "react-router-dom";
 

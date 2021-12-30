@@ -460,16 +460,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 6rem;
 }
 
-.mb-32 {
-  margin-bottom: 8rem;
+.mb-28 {
+  margin-bottom: 7rem;
 }
 
 .ml-20 {
   margin-left: 5rem;
-}
-
-.mb-28 {
-  margin-bottom: 7rem;
 }
 
 .mb-8 {
@@ -605,10 +601,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 20px;
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
 .py-\[14px\] {
   padding-top: 14px;
   padding-bottom: 14px;
@@ -629,19 +621,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 25px;
 }
 
-.px-24 {
-  padding-left: 6rem;
-  padding-right: 6rem;
-}
-
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .py-4 {
@@ -649,8 +631,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1rem;
 }
 
-.text-center {
-  text-align: center;
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
 }
 
 .text-\[24px\] {
@@ -946,6 +929,58 @@ a {
 
 .featured-post-link {
   justify-content: start;
+}
+
+/*Loding component */
+
+.loader,
+.loader:before,
+.loader:after {
+  background: transparent;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+
+.loader {
+  color: var(--primaryColor);
+  text-indent: -9999em;
+  margin: 88px auto;
+  margin-top: 20rem;
+  position: relative;
+  font-size: 3rem;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: "";
+}
+
+.loader:before {
+  left: -1.5em;
+  animation-delay: -0.32s;
+}
+
+.loader:after {
+  left: 1.5em;
+}
+
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
 }
 
 .hover\:text-nav-hover:hover {
