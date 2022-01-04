@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SingleFeaturedPost from "./SingleFeaturedPost";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useEffect } from "react/cjs/react.development";
+import ReactLoading from "react-loading";
+import { useGlobalContext } from "../context";
 
 const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
 const tagUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?tags=";
 
 const FeaturedPosts = () => {
+  const { loading } = useGlobalContext();
   const [featuredPosts, setFeaturedPosts] = useState([]);
 
   const NextArrow = (props) => {
@@ -54,9 +56,10 @@ const FeaturedPosts = () => {
     fetchFeaturedPosts();
   }, []);
 
-  if (featuredPosts.length < 1) {
-    return <p>no posts</p>;
+  if (loading || featuredPosts.length < 1) {
+    return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
+
   return (
     <section className="featured-posts">
       <h2 className="featured-posts-title">Featured posts</h2>

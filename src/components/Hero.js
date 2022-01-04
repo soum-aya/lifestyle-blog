@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCaretRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 import { useGlobalContext } from "../context";
 
 const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
@@ -8,11 +9,12 @@ const heroUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?tags=";
 const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
 function Hero() {
-  const [heroPost, setHeroPost] = useState(null);
+  const [heroPost, setHeroPost] = useState([]);
   const [heroImg, setHeroImg] = useState({});
-  const { logoDetails } = useGlobalContext();
+  const { logoDetails, loading, setLoading } = useGlobalContext();
 
   const fetchTags = async () => {
+    setLoading(true);
     try {
       const response = await fetch(tagsUrl);
       const tags = await response.json();
@@ -25,8 +27,10 @@ function Hero() {
       const response2 = await fetch(`${mediaUrl}${heroPost[0].featured_media}`);
       const heroImg = await response2.json();
       setHeroImg(heroImg);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -34,9 +38,10 @@ function Hero() {
     fetchTags();
   }, []);
 
-  if (!heroPost) {
-    return <p>no hero post</p>;
+  if (loading || heroPost.length < 1) {
+    return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
+
   return (
     <section className="hero">
       <div className="hero-center">

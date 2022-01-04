@@ -1,13 +1,16 @@
 import React from "react";
 import Post from "./Post";
 import { FaCaretDown } from "react-icons/fa";
+import ReactLoading from "react-loading";
 import { useGlobalContext } from "../context";
 
 function PostList() {
-  const { posts, pageNum, setPageNum, allPosts } = useGlobalContext();
-  if (!posts) {
-    return <p>no posts</p>;
+  const { posts, pageNum, setPageNum, allPosts, loading } = useGlobalContext();
+
+  if (loading || !posts) {
+    return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
+
   return (
     <section>
       <div className="mx-24">
