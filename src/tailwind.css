@@ -434,6 +434,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -482,10 +490,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2rem;
 }
 
-.block {
-  display: block;
-}
-
 .flex {
   display: flex;
 }
@@ -522,6 +526,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 50px;
 }
 
+.w-\[400px\] {
+  width: 400px;
+}
+
+.w-\[600px\] {
+  width: 600px;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -550,16 +566,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: center;
 }
 
-.justify-between {
-  justify-content: space-between;
-}
-
 .justify-evenly {
   justify-content: space-evenly;
-}
-
-.justify-items-stretch {
-  justify-items: stretch;
 }
 
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
@@ -580,16 +588,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.self-center {
-  align-self: center;
-}
-
 .justify-self-end {
   justify-self: end;
-}
-
-.justify-self-center {
-  justify-self: center;
 }
 
 .rounded-sm {
@@ -973,16 +973,97 @@ a {
   justify-content: start;
 }
 
+.odd\:inset-y-0:nth-child(odd) {
+  top: 0px;
+  bottom: 0px;
+}
+
+.odd\:left-0:nth-child(odd) {
+  left: 0px;
+}
+
+.odd\:left-\[500px\]:nth-child(odd) {
+  left: 500px;
+}
+
+.odd\:bg-slate-300:nth-child(odd) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
+.even\:absolute:nth-child(even) {
+  position: absolute;
+}
+
+.even\:relative:nth-child(even) {
+  position: relative;
+}
+
+.even\:inset-y-0:nth-child(even) {
+  top: 0px;
+  bottom: 0px;
+}
+
+.even\:right-0:nth-child(even) {
+  right: 0px;
+}
+
+.even\:w-\[400px\]:nth-child(even) {
+  width: 400px;
+}
+
 .hover\:text-nav-hover:hover {
   --tw-text-opacity: 1;
   color: rgb(255 0 0 / var(--tw-text-opacity));
 }
 
-@media (min-width: 768px) {
-  .md\:mr-2 {
-    margin-right: 0.5rem;
-  }
+.group:nth-child(odd) .group-odd\:inset-y-0 {
+  top: 0px;
+  bottom: 0px;
+}
 
+.group:nth-child(odd) .group-odd\:left-0 {
+  left: 0px;
+}
+
+.group:nth-child(odd) .group-odd\:left-\[500px\] {
+  left: 500px;
+}
+
+.group:nth-child(odd) .group-odd\:order-1 {
+  order: 1;
+}
+
+.group:nth-child(odd) .group-odd\:order-2 {
+  order: 2;
+}
+
+.group:nth-child(even) .group-even\:absolute {
+  position: absolute;
+}
+
+.group:nth-child(even) .group-even\:inset-y-0 {
+  top: 0px;
+  bottom: 0px;
+}
+
+.group:nth-child(even) .group-even\:right-0 {
+  right: 0px;
+}
+
+.group:nth-child(even) .group-even\:right-\[500px\] {
+  right: 500px;
+}
+
+.group:nth-child(even) .group-even\:order-2 {
+  order: 2;
+}
+
+.group:nth-child(even) .group-even\:order-1 {
+  order: 1;
+}
+
+@media (min-width: 768px) {
   .md\:ml-2 {
     margin-left: 0.5rem;
   }
