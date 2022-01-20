@@ -7,7 +7,7 @@ import { useGlobalContext } from "../context";
 function PostList() {
   const { posts, pageNum, setPageNum, allPosts, loading } = useGlobalContext();
 
-  if (loading || !posts) {
+  if (!posts) {
     return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
 
@@ -19,8 +19,8 @@ function PostList() {
         })}
       </div>
       <div className="flex items-center justify-center">
-        {pageNum <= allPosts.length ? (
-          <button className="flex items-center bg-nav-hover text-white uppercase px-8 py-4 text-sm mb-8" onClick={() => setPageNum((prev) => prev + 4)}>
+        {posts.length <= allPosts.length ? (
+          <button className="flex items-center bg-nav-hover text-white uppercase px-8 py-4 text-sm mb-8" onClick={() => setPageNum(pageNum + 1)}>
             load more
             <FaCaretDown className="flex-inline" />
           </button>

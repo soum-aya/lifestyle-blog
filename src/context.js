@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 
 const allPostsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts";
-const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?per_page=";
+const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?page=";
 const AppUrl = "http://localhost/wordpress/wp-json";
 const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
@@ -15,7 +15,7 @@ export const AppProvider = ({ children }) => {
   const [appInfo, setAppInfo] = useState({});
   const [logoDetails, setLogoDetails] = useState({});
 
-  const [pageNum, setPageNum] = useState(4);
+  const [pageNum, setPageNum] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
 
   const fetchallPosts = async () => {
@@ -32,15 +32,12 @@ export const AppProvider = ({ children }) => {
   };
 
   const fetchPosts = async () => {
-    setLoading(true);
     try {
       const response = await fetch(`${postsUrl}${pageNum}`);
-      const posts = await response.json();
-      setPosts(posts);
-      setLoading(false);
+      const newPosts = await response.json();
+      setPosts([...posts, ...newPosts]);
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
 

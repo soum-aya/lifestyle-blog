@@ -17,7 +17,7 @@ function Navbar() {
 
   return (
     <nav onMouseOver={handleSubnav} className="sticky w-full z-10 top-0 right-0 left-0 text-nav-gray bg-white shadow-nav-shadow">
-      <div className="p-[20px] flex items-center justify-between md:p-0 md:mr-2">
+      <div className="p-[20px] grid grid-cols-3 items-center md:p-0">
         <div>
           {isSearchOpen ? (
             <div className="hidden md:flex md:items-center md:min-h-[50px]">
@@ -49,12 +49,12 @@ function Navbar() {
           )}
         </div>
         <Link to="/">
-          <img src={logoDetails.source_url} className="h-auto w-[50px]" alt="logo" />
+          <img src={logoDetails.source_url} className="h-auto w-[50px]  mx-auto" alt="logo" />
         </Link>
-        <button className="cursor-pointer bg-transparent border-transparent text-nav-gray text-[24px] md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="cursor-pointer bg-transparent border-transparent text-nav-gray text-[24px] justify-self-end md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        <ul className="hidden md:max-h-[50px] md:flex md:items-center space-x-8">
+        <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8">
           {social.map((item) => {
             const { id, url, icon } = item;
             return (
