@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { social } from "../data";
 import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 import { Link } from "react-router-dom";
@@ -7,7 +6,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, facebookSocial, facebookIcon } = useGlobalContext();
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -55,7 +54,7 @@ function Navbar() {
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
         <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8">
-          {social.map((item) => {
+          {/* {social.map((item) => {
             const { id, url, icon } = item;
             return (
               <li key={id}>
@@ -64,7 +63,12 @@ function Navbar() {
                 </a>
               </li>
             );
-          })}
+          })} */}
+          <li>
+            <a>
+              <img src={facebookIcon.source_url} className="h-auto" />
+            </a>
+          </li>
         </ul>
       </div>
       <div className={isSearchOpen ? "flex items-center justify-center py-[45px] space-x-2 md:hidden" : "hidden"}>

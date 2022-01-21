@@ -5,9 +5,16 @@ const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?page=";
 const AppUrl = "http://localhost/wordpress/wp-json";
 const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
+const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
+const socialUrl = "http://localhost/wordpress/wp-json/wp/v2/socials?tags=";
+const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
+
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
+  const [facebookSocial, setFacebookSocial] = useState([]);
+  const [facebookIcon, setFacebookIcon] = useState({});
+
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -17,6 +24,32 @@ export const AppProvider = ({ children }) => {
 
   const [pageNum, setPageNum] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
+
+  const fetchTags = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(tagsUrl);
+      const tags = await response.json();
+
+      const facebookTag = tags.filter((tag) => tag.name === "facebook");
+      const response1 = await fetch(`${socialUrl}${facebookTag[0].id}`);
+      const facebookSocial = await response1.json();
+      setFacebookSocial(facebookSocial);
+      console.log(facebookSocial);
+      const response2 = await fetch(`${mediaUrl}${facebookSocial[0].featured_media}`);
+      const facebookIcon = await response2.json();
+      setFacebookIcon(facebookIcon);
+      setLoading(false);
+      console.log(facebookIcon);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
 
   const fetchallPosts = async () => {
     setLoading(true);
@@ -85,7 +118,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, facebookSocial, facebookIcon }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
