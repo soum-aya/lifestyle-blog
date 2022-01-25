@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
+import { FaBars, FaSearch, FaCaretDown, FaTimes, FaPinterest, FaFacebookSquare, FaInstagram, FaTwitter } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, facebookSocial, facebookIcon } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, arrayOfSocials, facebookSocial, twitterSocial, instagramSocial, pinterestSocial } = useGlobalContext();
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closeSubmenu();
     }
   };
-
+  if (instagramSocial.length < 1 || twitterSocial.length < 1 || pinterestSocial.length < 1 || facebookSocial.length < 1) {
+    return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
+  }
   return (
     <nav onMouseOver={handleSubnav} className="sticky w-full z-10 top-0 right-0 left-0 text-nav-gray bg-white shadow-nav-shadow">
       <div className="p-[20px] grid grid-cols-3 items-center md:p-0">
@@ -54,19 +57,24 @@ function Navbar() {
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
         <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8">
-          {/* {social.map((item) => {
-            const { id, url, icon } = item;
-            return (
-              <li key={id}>
-                <a href={url} className="md:text-nav-gray md:text-[28px]">
-                  {icon}
-                </a>
-              </li>
-            );
-          })} */}
           <li>
-            <a>
-              <img src={facebookIcon.source_url} className="h-auto" />
+            <a href={instagramSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
+              <FaInstagram />
+            </a>
+          </li>
+          <li>
+            <a href={twitterSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
+              <FaTwitter />
+            </a>
+          </li>
+          <li>
+            <a href={pinterestSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
+              <FaPinterest />
+            </a>
+          </li>
+          <li>
+            <a href={facebookSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
+              <FaFacebookSquare />
             </a>
           </li>
         </ul>

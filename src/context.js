@@ -7,13 +7,15 @@ const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
 const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
 const socialUrl = "http://localhost/wordpress/wp-json/wp/v2/socials?tags=";
-const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
+  const [arrayOfSocials, setArrayOfSocials] = useState([]);
   const [facebookSocial, setFacebookSocial] = useState([]);
-  const [facebookIcon, setFacebookIcon] = useState({});
+  const [twitterSocial, setTwitterSocial] = useState([]);
+  const [instagramSocial, setInstagramSocial] = useState([]);
+  const [pinterestSocial, setPinterestSocial] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -31,16 +33,21 @@ export const AppProvider = ({ children }) => {
       const response = await fetch(tagsUrl);
       const tags = await response.json();
 
+      const instagramTag = tags.filter((tag) => tag.name === "instagram");
+      const twitterTag = tags.filter((tag) => tag.name === "twitter");
+      const pinterestTag = tags.filter((tag) => tag.name === "pinterest");
       const facebookTag = tags.filter((tag) => tag.name === "facebook");
-      const response1 = await fetch(`${socialUrl}${facebookTag[0].id}`);
-      const facebookSocial = await response1.json();
+      const urls = [`${socialUrl}${instagramTag[0].id}`, `${socialUrl}${twitterTag[0].id}`, `${socialUrl}${pinterestTag[0].id}`, `${socialUrl}${facebookTag[0].id}`];
+
+      const arrayOfSocials = await Promise.all(urls.map((url) => fetch(url).then((res) => res.json())));
+
+      const [instagramSocial, twitterSocial, pinterestSocial, facebookSocial] = arrayOfSocials;
+      setArrayOfSocials(arrayOfSocials);
+      setInstagramSocial(instagramSocial);
+      setTwitterSocial(twitterSocial);
+      setPinterestSocial(pinterestSocial);
       setFacebookSocial(facebookSocial);
-      console.log(facebookSocial);
-      const response2 = await fetch(`${mediaUrl}${facebookSocial[0].featured_media}`);
-      const facebookIcon = await response2.json();
-      setFacebookIcon(facebookIcon);
       setLoading(false);
-      console.log(facebookIcon);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -118,7 +125,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, facebookSocial, facebookIcon }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, arrayOfSocials, facebookSocial, twitterSocial, instagramSocial, pinterestSocial }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
