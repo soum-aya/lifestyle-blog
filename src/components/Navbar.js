@@ -51,12 +51,12 @@ function Navbar() {
           )}
         </div>
         <Link to="/">
-          <img src={logoDetails.source_url} className="h-auto w-[50px]  mx-auto" alt="logo" />
+          <img src={logoDetails.source_url} className="h-[50px] mx-auto" alt="logo" />
         </Link>
         <button className="cursor-pointer bg-transparent border-transparent text-nav-gray text-[24px] justify-self-end md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8">
+        <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8 pr-5">
           <li>
             <a href={instagramSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
               <FaInstagram />

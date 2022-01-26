@@ -22,7 +22,7 @@ const Post = ({ title, content, featured_media, id }) => {
   return (
     <article className="flex mb-28 group">
       <div className="h-[800px] bg-center bg-no-repeat bg-cover flex-1 group-odd:order-1  group-even:order-2" style={{ backgroundImage: `url(${postImg.source_url})` }}></div>
-      <div className="flex-1 ml-20 flex flex-col items-start justify-center space-y-6 group-odd:order-2  group-even:order-1">
+      <div className="flex-1 group-odd:ml-20 group-even:mr-20 flex flex-col items-start justify-center space-y-6 group-odd:order-2  group-even:order-1">
         <h2 className="text-3xl tracking-widest font-bold uppercase">{title.rendered}</h2>
         <div dangerouslySetInnerHTML={{ __html: `${content.rendered.substring(0, 50)}...` }}></div>
         <Link to={`/post/${id}`} className="read-more ">

@@ -506,6 +506,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 800px;
 }
 
+.h-\[50px\] {
+  height: 50px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -514,8 +518,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 75%;
 }
 
-.w-\[50px\] {
-  width: 50px;
+.w-\[100px\] {
+  width: 100px;
 }
 
 .flex-1 {
@@ -566,6 +570,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.space-x-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(5rem * var(--tw-space-x-reverse));
+  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .justify-self-end {
@@ -652,6 +662,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-24 {
   padding-left: 6rem;
   padding-right: 6rem;
+}
+
+.pr-5 {
+  padding-right: 1.25rem;
 }
 
 .text-center {
@@ -966,12 +980,20 @@ a {
   order: 2;
 }
 
+.group:nth-child(odd) .group-odd\:ml-20 {
+  margin-left: 5rem;
+}
+
 .group:nth-child(even) .group-even\:order-2 {
   order: 2;
 }
 
 .group:nth-child(even) .group-even\:order-1 {
   order: 1;
+}
+
+.group:nth-child(even) .group-even\:mr-20 {
+  margin-right: 5rem;
 }
 
 @media (min-width: 768px) {
