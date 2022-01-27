@@ -3,19 +3,14 @@ import React, { useState, useContext, useEffect } from "react";
 const allPostsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts";
 const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?page=";
 const AppUrl = "http://localhost/wordpress/wp-json";
-const logoUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
+const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
-const tagsUrl = "http://localhost/wordpress/wp-json/wp/v2/tags";
-const socialUrl = "http://localhost/wordpress/wp-json/wp/v2/socials?tags=";
+const socialsUrl = "http://localhost/wordpress/wp-json/wp/v2/socials";
 
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const [arrayOfSocials, setArrayOfSocials] = useState([]);
-  const [facebookSocial, setFacebookSocial] = useState([]);
-  const [twitterSocial, setTwitterSocial] = useState([]);
-  const [instagramSocial, setInstagramSocial] = useState([]);
-  const [pinterestSocial, setPinterestSocial] = useState([]);
+  const [socials, setSocials] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -27,26 +22,12 @@ export const AppProvider = ({ children }) => {
   const [pageNum, setPageNum] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
 
-  const fetchTags = async () => {
+  const fetchSocials = async () => {
     setLoading(true);
     try {
-      const response = await fetch(tagsUrl);
-      const tags = await response.json();
-
-      const instagramTag = tags.filter((tag) => tag.name === "instagram");
-      const twitterTag = tags.filter((tag) => tag.name === "twitter");
-      const pinterestTag = tags.filter((tag) => tag.name === "pinterest");
-      const facebookTag = tags.filter((tag) => tag.name === "facebook");
-      const urls = [`${socialUrl}${instagramTag[0].id}`, `${socialUrl}${twitterTag[0].id}`, `${socialUrl}${pinterestTag[0].id}`, `${socialUrl}${facebookTag[0].id}`];
-
-      const arrayOfSocials = await Promise.all(urls.map((url) => fetch(url).then((res) => res.json())));
-
-      const [instagramSocial, twitterSocial, pinterestSocial, facebookSocial] = arrayOfSocials;
-      setArrayOfSocials(arrayOfSocials);
-      setInstagramSocial(instagramSocial);
-      setTwitterSocial(twitterSocial);
-      setPinterestSocial(pinterestSocial);
-      setFacebookSocial(facebookSocial);
+      const response = await fetch(socialsUrl);
+      const socials = await response.json();
+      setSocials(socials);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -55,7 +36,7 @@ export const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchTags();
+    fetchSocials();
   }, []);
 
   const fetchallPosts = async () => {
@@ -87,7 +68,7 @@ export const AppProvider = ({ children }) => {
       const response1 = await fetch(AppUrl);
       const appInfo = await response1.json();
       setAppInfo(appInfo);
-      const response2 = await fetch(`${logoUrl}${appInfo.site_logo}`);
+      const response2 = await fetch(`${mediaUrl}${appInfo.site_logo}`);
       const logoDetails = await response2.json();
       setLogoDetails(logoDetails);
       setLoading(false);
@@ -125,7 +106,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, arrayOfSocials, facebookSocial, twitterSocial, instagramSocial, pinterestSocial }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, socials }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {

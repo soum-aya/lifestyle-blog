@@ -474,12 +474,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 7rem;
 }
 
-.ml-20 {
-  margin-left: 5rem;
-}
-
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .flex {
@@ -498,16 +498,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 25px;
 }
 
-.h-auto {
-  height: auto;
+.h-\[50px\] {
+  height: 50px;
 }
 
 .h-\[800px\] {
   height: 800px;
 }
 
-.h-\[50px\] {
-  height: 50px;
+.h-\[26px\] {
+  height: 26px;
+}
+
+.h-\[28px\] {
+  height: 28px;
+}
+
+.h-\[30px\] {
+  height: 30px;
+}
+
+.h-9 {
+  height: 2.25rem;
 }
 
 .w-full {
@@ -516,10 +528,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-3\/4 {
   width: 75%;
-}
-
-.w-\[100px\] {
-  width: 100px;
 }
 
 .flex-1 {
@@ -570,12 +578,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.space-x-20 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(5rem * var(--tw-space-x-reverse));
-  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .justify-self-end {
@@ -1070,15 +1072,6 @@ a {
   .md\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .md\:text-\[28px\] {
-    font-size: 28px;
-  }
-
-  .md\:text-nav-gray {
-    --tw-text-opacity: 1;
-    color: rgb(155 155 155 / var(--tw-text-opacity));
   }
 
   .md\:hover\:text-nav-hover:hover {

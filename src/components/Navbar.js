@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { FaBars, FaSearch, FaCaretDown, FaTimes, FaPinterest, FaFacebookSquare, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { Social } from "./Social";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, arrayOfSocials, facebookSocial, twitterSocial, instagramSocial, pinterestSocial } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, socials } = useGlobalContext();
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closeSubmenu();
     }
   };
-  if (instagramSocial.length < 1 || twitterSocial.length < 1 || pinterestSocial.length < 1 || facebookSocial.length < 1) {
+  if (!socials) {
     return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
   return (
@@ -57,26 +58,9 @@ function Navbar() {
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
         <ul className="hidden md:justify-self-end md:max-h-[50px] md:flex md:items-center space-x-8 pr-5">
-          <li>
-            <a href={instagramSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
-              <FaInstagram />
-            </a>
-          </li>
-          <li>
-            <a href={twitterSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
-              <FaTwitter />
-            </a>
-          </li>
-          <li>
-            <a href={pinterestSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
-              <FaPinterest />
-            </a>
-          </li>
-          <li>
-            <a href={facebookSocial[0].acf.accountlink} className="md:text-nav-gray md:text-[28px]">
-              <FaFacebookSquare />
-            </a>
-          </li>
+          {socials.map((social) => {
+            return <Social key={social.id} {...social} />;
+          })}
         </ul>
       </div>
       <div className={isSearchOpen ? "flex items-center justify-center py-[45px] space-x-2 md:hidden" : "hidden"}>
