@@ -470,6 +470,21 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 4rem;
 }
 
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .mb-28 {
   margin-bottom: 7rem;
 }
@@ -504,18 +519,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[800px\] {
   height: 800px;
-}
-
-.h-\[26px\] {
-  height: 26px;
-}
-
-.h-\[28px\] {
-  height: 28px;
-}
-
-.h-\[30px\] {
-  height: 30px;
 }
 
 .h-9 {
@@ -703,6 +706,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .font-extrabold {
   font-weight: 800;
 }
@@ -725,6 +733,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
 }
 
 .text-nav-gray {

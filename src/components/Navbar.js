@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaBars, FaSearch, FaCaretDown, FaTimes } from "react-icons/fa";
 import { useGlobalContext } from "../context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { Social } from "./Social";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const searchValue = useRef("");
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, socials } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, socials, setSearchTerm } = useGlobalContext();
+
+  let navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchValue.current.value);
+    navigate("/search");
+  };
 
   const handleSubnav = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -27,7 +36,9 @@ function Navbar() {
               <button className="text-nav-gray bg-transparent border-transparent text-[24px] cursor-pointer  hover:text-nav-hover md:text-base md:py-[14px] md:px-5 ">
                 <FaSearch />
               </button>
-              <input type="text" className="border-0 bg-[#eeeeee] rounded-sm w-3/4 h-[25px] outline-0 md:h-auto md:w-[220px] md:ml-2 md:mr-1" />
+              <form onSubmit={handleSearch}>
+                <input type="text" ref={searchValue} className="border-0 bg-[#eeeeee] rounded-sm w-3/4 h-[25px] outline-0 md:h-auto md:w-[220px] md:ml-2 md:mr-1" />
+              </form>
               <FaTimes className="cursor-pointer text-2xl hover:text-nav-hover md:text-base" onClick={closeSearch} />
             </div>
           ) : (
