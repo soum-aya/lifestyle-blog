@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="about" element={<About />}></Route>
         <Route path="post/:id" element={<PostDetails />}></Route>
-        <Route path="search" element={<SearchResult />}></Route>
+        <Route path="search/:word" element={<SearchResult />}></Route>
       </Routes>
     </div>
   );

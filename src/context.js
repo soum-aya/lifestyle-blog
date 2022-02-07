@@ -6,13 +6,10 @@ const AppUrl = "http://localhost/wordpress/wp-json";
 const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
 const socialsUrl = "http://localhost/wordpress/wp-json/wp/v2/socials";
-const searchUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?per_page=5&search=";
 
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchPosts, setSearchPosts] = useState([]);
   const [socials, setSocials] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -24,26 +21,6 @@ export const AppProvider = ({ children }) => {
 
   const [pageNum, setPageNum] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
-
-  const fetchSearchPosts = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${searchUrl}${searchTerm}`);
-      const searchPosts = await response.json();
-      setSearchPosts(searchPosts);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSearchPosts();
-    return () => {
-      setSearchPosts([]);
-    };
-  }, [searchTerm]);
 
   const fetchSocials = async () => {
     setLoading(true);
@@ -129,7 +106,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, socials, searchPosts, searchTerm, setSearchTerm }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, socials }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {

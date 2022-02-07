@@ -9,14 +9,13 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const searchValue = useRef("");
 
-  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, socials, setSearchTerm } = useGlobalContext();
+  const { openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, logoDetails, socials } = useGlobalContext();
 
   let navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchTerm(searchValue.current.value);
-    navigate("/search");
+    navigate(`/search/${searchValue.current.value}`);
   };
 
   const handleSubnav = (e) => {
