@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { useGlobalContext } from "../context";
 
 function PostList() {
-  const { posts, pageNum, setPageNum, allPosts, loading } = useGlobalContext();
+  const { posts, pageNum, setPageNum, allPosts } = useGlobalContext();
 
   if (!posts) {
     return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;

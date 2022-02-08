@@ -6,6 +6,7 @@ const Post = ({ title, content, featured_media, id }) => {
   const mediaUrl = `http://localhost/wordpress/wp-json/wp/v2/media/${featured_media}`;
 
   const [postImg, setPostImg] = useState({});
+
   const fetchPostImg = async () => {
     try {
       const response = await fetch(mediaUrl);
