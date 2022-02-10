@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 
 const allPostsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts";
-const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?page=";
+const postsUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?per_page=5&page=";
 const AppUrl = "http://localhost/wordpress/wp-json";
 const mediaUrl = "http://localhost/wordpress/wp-json/wp/v2/media/";
 
@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
 
   const [pageNum, setPageNum] = useState(1);
   const [allPosts, setAllPosts] = useState([]);
+  const [nextPosts, setNextPosts] = useState([]);
 
   const fetchSocials = async () => {
     setLoading(true);
@@ -56,6 +57,7 @@ export const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${postsUrl}${pageNum}`);
       const newPosts = await response.json();
+      setNextPosts(newPosts);
       setPosts([...posts, ...newPosts]);
     } catch (error) {
       console.log(error);
@@ -106,7 +108,7 @@ export const AppProvider = ({ children }) => {
   const closeSearch = () => {
     setIsSearchOpen(false);
   };
-  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, loading, setLoading, socials }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ isSubmenuOpen, openSubmenu, closeSubmenu, isSearchOpen, openSearch, closeSearch, posts, appInfo, logoDetails, setPageNum, pageNum, allPosts, nextPosts, loading, setLoading, socials }}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
