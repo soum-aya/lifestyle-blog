@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import ReactLoading from "react-loading";
 import { useGlobalContext } from "../context";
+import Footer from "../components/Footer";
 
 const searchUrl = "http://localhost/wordpress/wp-json/wp/v2/posts?per_page=5&search=";
 
@@ -50,6 +51,7 @@ const SearchResult = () => {
           return <Post key={item.id} {...item} />;
         })}
       </div>
+      <Footer />
     </section>
   );
 };
