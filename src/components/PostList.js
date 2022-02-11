@@ -20,9 +20,9 @@ function PostList() {
       </div>
       <div className="flex items-center justify-center">
         {nextPosts.length < 5 ? (
-          <p className="mb-8 capitalize text-lg font-semibold">no more posts to load!</p>
+          <p className="mb-12 capitalize text-lg font-semibold">no more posts to load!</p>
         ) : (
-          <button className="flex items-center bg-nav-hover text-white uppercase px-8 py-4 text-sm mb-8" onClick={() => setPageNum(pageNum + 1)}>
+          <button className="flex items-center bg-nav-hover text-white uppercase px-10 py-4 mb-12 font-medium" onClick={() => setPageNum(pageNum + 1)}>
             load more
             <FaCaretDown className="flex-inline" />
           </button>
