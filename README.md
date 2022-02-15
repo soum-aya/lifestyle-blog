@@ -47,16 +47,16 @@ the slider is created with the slick package, and the featured posts are fetched
 
 this section displays all the posts based on demand. It was accomplished through the rest api pagination and the load more functionnality.
 
-[!the posts list](/src/images/posts-list.PNG)
+![the posts list](/src/images/posts-list.PNG)
 
-[!load more button](/src/images/load-more.PNG)
+![load more button](/src/images/load-more.PNG)
 
 ### Footer
 
 the last section is the footer:
 
-[!footer](/src/images/footer.PNG)
+![footer](/src/images/footer.PNG)
 
 To get more informations about a post, there is a read more button on every post that allows the user to display more details about the post:
 
-[!post details](/src/images/post-details.PNG)
+![post details](/src/images/post-details.PNG)
