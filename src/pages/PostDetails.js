@@ -40,7 +40,7 @@ const PostDetails = () => {
           <h2 className="text-3xl tracking-widest font-bold uppercase">{post.title.rendered}</h2>
           <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} className="hero-desc"></div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} className="col-span-2"></div>
+        <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} className="col-span-2 my-8"></div>
       </div>
       <Footer />
     </section>

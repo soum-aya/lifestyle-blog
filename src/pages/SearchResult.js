@@ -35,7 +35,7 @@ const SearchResult = () => {
   if (loading) {
     return <ReactLoading className="text-center mx-auto" type="bars" color={"#9b9b9b"} height={48} width={100} delay={50} />;
   }
-  if (!searchPosts) {
+  if (searchPosts.length === 0) {
     return (
       <div className="text-center my-10">
         <h1 className=" font-extrabold text-2xl tracking-wide capitalize">nothing found</h1>
