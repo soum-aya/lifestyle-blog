@@ -1,6 +1,6 @@
 # My first blog/website
 
-this blog is a clone to one of my favourite blogs <https://sayyes.com/>.
+the frontend design of this blog is based on one of my favourite blogs <https://sayyes.com/>.
 
 I built this blog using React.js and tailwind css for the front-end.
 
